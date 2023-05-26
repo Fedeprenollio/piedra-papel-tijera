@@ -119,6 +119,7 @@ function App () {
 
   // LA FUNCION PARA DETECTAR LAS TECLAS DE LOS JUGADORES:
   const handleKeyDownPlayer = (e) => {
+    e.preventDefault()
     if (theWinnerIs) return
 
     if (LETTER_PLAYER1.concat(...LETTER_PLAYER2).includes(e.key)) {
