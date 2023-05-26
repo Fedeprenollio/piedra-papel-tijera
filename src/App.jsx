@@ -164,7 +164,8 @@ function App () {
           <form>
             <input
               className="input-game"
-              onKeyDown={handleKeyDownPlayer}
+              // onKeyDown={handleKeyDownPlayer}
+              onKeyUp={handleKeyDownPlayer}
               value={letterPlayer1}
               autoFocus
               type="password"
