@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import { resetGameToStorage, saveSettingToStorage } from './logic/storage'
+import { resetGameToStorage, savePairsLettersPairsToStorage, saveSettingToStorage } from './logic/storage'
 import { useElements } from './hooks/useElements'
 import { useSetting } from './hooks/useSetting'
 import { useGetResult } from './hooks/useGetResult'
@@ -11,6 +11,8 @@ import { ScoreBoard } from './components/ScoreBoard'
 import { Insctructions } from './components/Insctructions'
 import ScoreMoves from './components/ScoreMoves'
 import { IconAtom } from './elements/Icons'
+import { getResult } from './logic/services/getResult'
+import { getElement } from './logic/services/getElement'
 export const WINNER_PLAYER1_COMBOS = [
   'al', // piedra a tijera
   'sj', // papel a piedra
@@ -26,6 +28,20 @@ export const WINNER_PLAYER1_COMBOS = [
 export const TIE_COMBOS = ['aj', 'sk', 'dl', 'zn', 'xm']
 
 function App () {
+  const [input, setInput] = useState('')
+  const [letterPlayer1, setLetterPlayer1] = useState('')
+  const [letterPlayer2, setLetterPlayer2] = useState('')
+  const [allLettersPlayers, setAllLettersPlayers] = useState(() => {
+    const AllLetterAfromLocalStorage = window.localStorage.getItem('lettersPairs')
+    console.log(AllLetterAfromLocalStorage)
+    return AllLetterAfromLocalStorage
+      ? JSON.parse(AllLetterAfromLocalStorage)
+      : {
+          playerOne: [],
+          playerTwo: []
+        }
+  })
+
   const [scored, setScored] = useState({
     player1: [],
     player2: []
@@ -43,17 +59,12 @@ function App () {
   const { setting, setSetting } = useSetting()
   const { theWinnerIs, setTheWinnerIs } = useGetResult(setting, parcialResult)
   const {
-
-    letterPlayer1,
-    letterPlayer2,
     elementPlayerOne,
     elementPlayerTwo,
     setElementPlayerOne,
-    setElementPlayerTwo,
-    setLetterPlayer1,
-    setLetterPlayer2,
-    setAllLettersPlayers
-  } = useElements(theWinnerIs, setParcialResult, scored, setScored)
+    setElementPlayerTwo
+    // setAllLettersPlayers
+  } = useElements(theWinnerIs, setParcialResult, scored, setScored, setInput, input, letterPlayer1, setLetterPlayer1, letterPlayer2, setLetterPlayer2)
   // const { parcialResult, setParcialResult } = useParcialResult(letterPlayer1, letterPlayer2)
 
   const { setTheElementsWhitClass } = useGetElementsFromLS(
@@ -118,32 +129,92 @@ function App () {
     : ['j', 'k', 'l']
 
   // LA FUNCION PARA DETECTAR LAS TECLAS DE LOS JUGADORES:
+  const getLastMatchingLetter = (array, string) => {
+    const matchingLetters = [...string].filter((letter) => array.includes(letter))
+    return matchingLetters[matchingLetters.length - 1]
+  }
+  console.log(input)
+
+  useEffect(() => {
+    if (theWinnerIs) return
+    savePairsLettersPairsToStorage(allLettersPlayers)
+  }, [allLettersPlayers])
+
+  useEffect(() => {
+    const newLetters = input
+    const lastLetterArr1 = getLastMatchingLetter(LETTER_PLAYER1, newLetters)
+    const lastLetterArr2 = getLastMatchingLetter(LETTER_PLAYER2, newLetters)
+    console.log(lastLetterArr1, lastLetterArr2)
+    if (lastLetterArr1 && lastLetterArr2) {
+      setLetterPlayer1(lastLetterArr1)
+      setLetterPlayer2(lastLetterArr2)
+
+      // probando:
+      console.log(lastLetterArr1, lastLetterArr2)
+      const [className1, className2] = getResult(lastLetterArr1, lastLetterArr2, true)
+      const elementPlayer1 = getElement(lastLetterArr1)
+
+      setElementPlayerOne([{ elementPlayer1, className: className1 }, ...elementPlayerOne])
+      const elementPlayer2 = getElement(lastLetterArr2)
+
+      setElementPlayerTwo([{ elementPlayer2, className: className2 }, ...elementPlayerTwo])
+
+      // savePairsLettersPairsToStorage(allLettersPlayers)
+
+      setLetterPlayer1('')
+      setLetterPlayer2('')
+      setInput('')
+
+      // probando: SETEO LOS NUEVOS RESUTADOS
+      const isTie = TIE_COMBOS.find(combo => combo === `${lastLetterArr1}${lastLetterArr2}`)
+      if (isTie) return
+
+      const isWinnerPlayerOne = WINNER_PLAYER1_COMBOS.find(combo => combo === `${lastLetterArr1}${lastLetterArr2}`)
+      if (isWinnerPlayerOne) {
+        setScored(prevState => ({ ...prevState, player1: [...prevState.player1, true] }))
+        setParcialResult(prevState => ({ ...prevState, player1: prevState.player1 + 1 }))
+      } else {
+        setScored(prevState => ({ ...prevState, player2: [...prevState.player2, true] }))
+        setParcialResult(prevState => ({ ...prevState, player2: prevState.player2 + 1 }))
+      }
+      // fin de prueba
+      setAllLettersPlayers((prevState) => ({
+        ...prevState,
+        playerOne: [...prevState.playerOne, lastLetterArr1],
+        playerTwo: [...prevState.playerOne, lastLetterArr2]
+      }))
+    }
+  }, [input, allLettersPlayers, parcialResult, letterPlayer1, letterPlayer2])
+
   const handleKeyDownPlayer = (e) => {
     e.preventDefault()
     if (theWinnerIs) return
+    setInput(e.target.value)
 
-    if (LETTER_PLAYER1.concat(...LETTER_PLAYER2).includes(e.key)) {
-      if (LETTER_PLAYER1.includes(e.key)) {
-        setLetterPlayer1(e.key)
-        setAllLettersPlayers((prevState) => ({
-          ...prevState,
-          playerOne: [...prevState.playerOne, e.key]
-        }))
-      }
+    // const lettersA = arrOfLetter.filter(letter => letter.includes(LETTER_PLAYER1))
+    // console.log('letras exritas', lettersA)
+    // // if (LETTER_PLAYER1.concat(...LETTER_PLAYER2).includes(value)) {
+    // if (LETTER_PLAYER1.includes(e.target.value)) {
+    //   setLetterPlayer1(e.target.value)
+    //   setAllLettersPlayers((prevState) => ({
+    //     ...prevState,
+    //     playerOne: [...prevState.playerOne, e.target.value]
+    //   }))
+    // }
 
-      if (LETTER_PLAYER2.includes(e.key)) {
-        setLetterPlayer2(e.key)
-        setAllLettersPlayers((prevState) => ({
-          ...prevState,
-          playerTwo: [...prevState.playerTwo, e.key]
-        }))
-      }
-    }
+    // if (LETTER_PLAYER2.includes(e.target.value)) {
+    //   setLetterPlayer2(e.target.value)
+    //   setAllLettersPlayers((prevState) => ({
+    //     ...prevState,
+    //     playerTwo: [...prevState.playerTwo, e.target.value]
+    //   }))
+    // }
+    // }
   }
 
   return (
     <>
-      <h1>Piedra-papel-tijera {setting.estiloSheldon && <IconAtom/>}</h1>
+      <h1>Piedra-papel-tijera {setting.estiloSheldon && <div><IconAtom/></div> }</h1>
       <div className="container">
         <Insctructions setting={setting} player="p1" />
         <div className="game">
@@ -161,12 +232,13 @@ function App () {
             theWinnerIs={theWinnerIs}
           />
 
-          <form>
+          <form onChange={handleKeyDownPlayer}
+ >
             <input
               className="input-game"
               // onKeyDown={handleKeyDownPlayer}
-              onKeyUp={handleKeyDownPlayer}
-              value={letterPlayer1}
+              // onKeyUp={handleKeyDownPlayer}
+              value={input}
               autoFocus
               type="password"
               placeholder="El cursor debe estar aca para jugar"

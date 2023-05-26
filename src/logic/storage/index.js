@@ -12,7 +12,7 @@ export const saveMovesToStorageB = ({ allLetterB }) => {
 }
 
 export const saveSettingToStorage = ({ setting }) => {
-  console.log("SETTING GUARDADO",setting)
+  console.log('SETTING GUARDADO', setting)
   window.localStorage.setItem('setting', JSON.stringify(setting))
 }
 

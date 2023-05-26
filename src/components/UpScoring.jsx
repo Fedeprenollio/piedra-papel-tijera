@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import './UpScoring.css'
 
 export const UpScoring = ({ scored, setScored, player }) => {
-  console.log('SCORED', scored)
   useEffect(() => {
     if (scored.player1.includes(true)) {
       setTimeout(() => {
