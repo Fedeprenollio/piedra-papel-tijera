@@ -1,0 +1,42 @@
+/* .contaiener-upScoring{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+} */
+
+.participant {   
+    position: relative;
+    
+ 
+}
+  .score {
+    position: absolute;
+    color: green;
+    font-size: 25px;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: scoreAnimation 1s ease-in-out forwards;
+    height: 300px;
+  }
+  
+.one{
+  top: 80%;
+    left: 10%;
+}
+.two {
+  top: 100%;
+    right: 0%;
+}
+
+
+  @keyframes scoreAnimation {
+    0% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-50px);
+    }
+  }
+  
