@@ -133,7 +133,6 @@ function App () {
     const matchingLetters = [...string].filter((letter) => array.includes(letter))
     return matchingLetters[matchingLetters.length - 1]
   }
-  console.log(input)
 
   useEffect(() => {
     if (theWinnerIs) return
@@ -144,13 +143,10 @@ function App () {
     const newLetters = input
     const lastLetterArr1 = getLastMatchingLetter(LETTER_PLAYER1, newLetters)
     const lastLetterArr2 = getLastMatchingLetter(LETTER_PLAYER2, newLetters)
-    console.log(lastLetterArr1, lastLetterArr2)
+    setLetterPlayer1(lastLetterArr1)
+    setLetterPlayer2(lastLetterArr2)
     if (lastLetterArr1 && lastLetterArr2) {
-      setLetterPlayer1(lastLetterArr1)
-      setLetterPlayer2(lastLetterArr2)
-
       // probando:
-      console.log(lastLetterArr1, lastLetterArr2)
       const [className1, className2] = getResult(lastLetterArr1, lastLetterArr2, true)
       const elementPlayer1 = getElement(lastLetterArr1)
 
@@ -161,16 +157,19 @@ function App () {
 
       // savePairsLettersPairsToStorage(allLettersPlayers)
 
-      setLetterPlayer1('')
-      setLetterPlayer2('')
+      // setLetterPlayer1('')
+      // setLetterPlayer2('')
       setInput('')
 
       // probando: SETEO LOS NUEVOS RESUTADOS
       const isTie = TIE_COMBOS.find(combo => combo === `${lastLetterArr1}${lastLetterArr2}`)
-      if (isTie) return
+      // if (isTie) return
 
       const isWinnerPlayerOne = WINNER_PLAYER1_COMBOS.find(combo => combo === `${lastLetterArr1}${lastLetterArr2}`)
-      if (isWinnerPlayerOne) {
+      if (isTie) {
+        setScored(prevState => prevState)
+        setParcialResult(prevState => prevState)
+      } else if (isWinnerPlayerOne) {
         setScored(prevState => ({ ...prevState, player1: [...prevState.player1, true] }))
         setParcialResult(prevState => ({ ...prevState, player1: prevState.player1 + 1 }))
       } else {
@@ -181,7 +180,7 @@ function App () {
       setAllLettersPlayers((prevState) => ({
         ...prevState,
         playerOne: [...prevState.playerOne, lastLetterArr1],
-        playerTwo: [...prevState.playerOne, lastLetterArr2]
+        playerTwo: [...prevState.playerTwo, lastLetterArr2]
       }))
     }
   }, [input, allLettersPlayers, parcialResult, letterPlayer1, letterPlayer2])
@@ -225,7 +224,7 @@ function App () {
           />
 
           <ScoreBoard
-            elementPlayerOne={elementPlayerOne}
+            allLettersPlayers={allLettersPlayers}
             setting={setting}
             parcialResult={parcialResult}
             handleReset={handleReset}

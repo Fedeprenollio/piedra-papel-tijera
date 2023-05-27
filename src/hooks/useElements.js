@@ -54,11 +54,11 @@ export function useElements (theWinnerIs, setParcialResult, scored, setScored, s
       // // fin de prueba
     }
 
-    if (theWinnerIs) {
-      setElementPlayerOne([...elementPlayerOne.slice(1)])
-      setElementPlayerTwo([...elementPlayerTwo.slice(1)])
-      // alert(theWinnerIs)
-    }
+    // if (theWinnerIs) {
+    //   setElementPlayerOne([...elementPlayerOne.slice(1)])
+    //   setElementPlayerTwo([...elementPlayerTwo.slice(1)])
+    //   // alert(theWinnerIs)
+    // }
   }, [letterPlayer1, letterPlayer2, theWinnerIs, elementPlayerOne, elementPlayerTwo, input])
 
   return { elementPlayerOne, elementPlayerTwo, setElementPlayerOne, setElementPlayerTwo }

@@ -3,7 +3,6 @@ export const saveGameToStorage = ({ result }) => {
 }
 
 export const saveMovesToStorageA = ({ allLetterA }) => {
-  console.log(allLetterA)
   window.localStorage.setItem('moves1', JSON.stringify(allLetterA))
 }
 
@@ -12,7 +11,6 @@ export const saveMovesToStorageB = ({ allLetterB }) => {
 }
 
 export const saveSettingToStorage = ({ setting }) => {
-  console.log('SETTING GUARDADO', setting)
   window.localStorage.setItem('setting', JSON.stringify(setting))
 }
 

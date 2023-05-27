@@ -3,7 +3,6 @@ import { useState } from 'react'
 export function useSetting () {
   const [setting, setSetting] = useState(() => {
     const settingFromLocalStorage = window.localStorage.getItem('setting')
-    console.log(settingFromLocalStorage)
     return settingFromLocalStorage
       ? JSON.parse(settingFromLocalStorage)
       : {

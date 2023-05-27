@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { IconSad, IconWait, IconWinner, IcontQuestionMark } from '../elements/Icons'
-import Confetti from 'react-confetti'
 
 /* eslint-disable react/prop-types */
 export const FirstElemetB = ({ theWinnerIs, letterPlayer1, letterPlayer2 }) => {
@@ -19,7 +18,6 @@ export const FirstElemetB = ({ theWinnerIs, letterPlayer1, letterPlayer2 }) => {
       </div>
     )
   }
-
   if (!letterPlayer1 && letterPlayer2) {
     return (
         <div className='container-icon-wait'>
@@ -45,6 +43,7 @@ export const FirstElemetB = ({ theWinnerIs, letterPlayer1, letterPlayer2 }) => {
     )
   }
 }
+
 export const FirstElemetA = ({ theWinnerIs, letterPlayer1, letterPlayer2 }) => {
   if (theWinnerIs === 'El ganador es el player1') {
     return (

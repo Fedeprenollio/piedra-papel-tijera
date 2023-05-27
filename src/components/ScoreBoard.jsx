@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { MoodsPlayer1 } from './MoodsPlayer1'
 
-export const ScoreBoard = ({ elementPlayerOne, setting, parcialResult, handleReset, theWinnerIs }) => {
+export const ScoreBoard = ({ allLettersPlayers, setting, parcialResult, handleReset, theWinnerIs }) => {
   return (
 
     <div className='results'>
@@ -11,14 +12,16 @@ export const ScoreBoard = ({ elementPlayerOne, setting, parcialResult, handleRes
         <h4>{setting.namePlayer1}  </h4>
         <h5><b>{parcialResult.player1}</b></h5>
       </div>
+        <MoodsPlayer1 parcialResult={parcialResult}/>
       <div >
         <h4> {setting.namePlayer2} </h4>
         <h5><b>{parcialResult.player2}</b> </h5>
+
       </div>
     </div>
     {/* {elementPlayerOne?.length > 0 && elementPlayerTwo?.length > 0 && */}
 
-      <button hidden={ elementPlayerOne.length === 0 } onClick={handleReset}> {theWinnerIs ? 'Jugar de nuevo' : 'Reiniciar el resultado' }</button>
+      <button hidden={ allLettersPlayers.playerOne.length === 0 } onClick={handleReset}> {theWinnerIs ? 'Jugar de nuevo' : 'Reiniciar el resultado' }</button>
 
     {theWinnerIs && <h2>{theWinnerIs}</h2>}
   </div>
