@@ -13,6 +13,7 @@ import ScoreMoves from './components/ScoreMoves'
 import { IconAtom } from './elements/Icons'
 import { getResult } from './logic/services/getResult'
 import { getElement } from './logic/services/getElement'
+import { MoodPlayers } from './components/MoodPlayers'
 export const WINNER_PLAYER1_COMBOS = [
   'al', // piedra a tijera
   'sj', // papel a piedra
@@ -213,7 +214,11 @@ function App () {
 
   return (
     <>
-      <h1>Piedra-papel-tijera {setting.estiloSheldon && <div><IconAtom/></div> }</h1>
+    <div className='title'>
+      <h1 >Piedra-papel-tijera</h1>
+      {setting.estiloSheldon && <div><IconAtom/></div> }
+    </div>
+
       <div className="container">
         <Insctructions setting={setting} player="p1" />
         <div className="game">
@@ -251,6 +256,7 @@ function App () {
 
         <Insctructions setting={setting} player="p2" />
       </div>
+
     </>
   )
 }

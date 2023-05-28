@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { IconPaper, IconSissor, IconSpock, IconStone, Snake } from '../elements/Icons'
+import "./Instructions.css"
 
 export const Insctructions = ({ setting, player }) => {
   return (
-    <div className='insctructions insctructions-player1'>
-    <div>
+    <div className={ player === 'p1' ? 'insctructions container-p1' : 'insctructions container-p2' }>
+
       <h4>Instrucciones</h4>
       <table>
         <thead>
@@ -45,7 +46,7 @@ export const Insctructions = ({ setting, player }) => {
           }
       </tbody>
       </table>
-    </div>
+
   </div>
   )
 }

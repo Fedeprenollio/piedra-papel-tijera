@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { MoodsPlayer1 } from './MoodsPlayer1'
+import { MoodPlayers } from './MoodPlayers'
 
 export const ScoreBoard = ({ allLettersPlayers, setting, parcialResult, handleReset, theWinnerIs }) => {
   return (
@@ -12,7 +13,7 @@ export const ScoreBoard = ({ allLettersPlayers, setting, parcialResult, handleRe
         <h4>{setting.namePlayer1}  </h4>
         <h5><b>{parcialResult.player1}</b></h5>
       </div>
-        <MoodsPlayer1 parcialResult={parcialResult}/>
+      <MoodPlayers parcialResult={parcialResult} setting={setting} theWinnerIs={theWinnerIs}/>
       <div >
         <h4> {setting.namePlayer2} </h4>
         <h5><b>{parcialResult.player2}</b> </h5>

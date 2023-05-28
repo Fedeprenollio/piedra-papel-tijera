@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import './Setting.css'
 
 export const Setting = ({ setting, handleSetting, error }) => {
   return (

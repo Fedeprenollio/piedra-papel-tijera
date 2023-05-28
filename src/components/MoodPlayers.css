@@ -1,0 +1,58 @@
+
+.container-mood
+{
+    position: relative;
+    /* height: 200px; Altura del contenedor */
+    width: 100px;
+    overflow: hidden; /* Ocultar cualquier contenido que se desborde */
+   
+
+
+}
+  .mood {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+   width: 100px;
+    /* background-color: red; */
+    /* animation: ascend 2s ease; */
+    animation: slidein 3s linear  alternate ;
+
+  }
+
+/* .player-one-mood{
+    top: 80%;
+    left: 10%;
+    border: 1px solid rgb(255, 0, 81);
+} */
+.player-two {
+  top: 100%;
+    right: 0%;
+}
+
+
+
+  /* @keyframes ascend {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+      }
+  }
+   */
+
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      /* width: 300%; */
+    }
+  
+    to {
+      margin-left: 0%;
+      /* width: 100%; */
+    }
+  }

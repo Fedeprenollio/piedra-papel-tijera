@@ -8,24 +8,21 @@ export default function ScoreMoves ({ scored, setScored, setting, theWinnerIs, l
   return (
     <div className="parcial-results">
             <div>
-              {theWinnerIs &&
-              <Confetti
-              confettiSource={theWinnerIs === 'El ganador es el player1' ? { x: 0, y: 0, w: window.innerWidth / 2, h: window.innerHeight / 2 } : { x: window.innerWidth / 2, y: 0, w: window.innerWidth / 2, h: window.innerHeight / 2 } }
-              // width="100px"
-              // height="100px"
-              // gravity={0.1}
-              // initialVelocityX={10}
-              // initialVelocityY={10}
-              // tweenDuration={4000}
-              // startVelocity={15}
-              particleCount={300}
-            />}
-              <h2 >{setting.namePlayer1}</h2>
-              <UpScoring scored={scored} setScored={setScored} player="one"/>
+                  {theWinnerIs &&
+                  <Confetti
+                  confettiSource={theWinnerIs === 'El ganador es el player1' ? { x: 0, y: 0, w: window.innerWidth / 2, h: window.innerHeight / 2 } : { x: window.innerWidth / 2, y: 0, w: window.innerWidth / 2, h: window.innerHeight / 2 } }
+                  // width="100px"
+                  // height="100px"
+                  // gravity={0.1}
+                  // initialVelocityX={10}
+                  // initialVelocityY={10}
+                  // tweenDuration={4000}
+                  // startVelocity={15}
+                  particleCount={300} />}
+                  <h2 >{setting.namePlayer1}</h2>
+                  <UpScoring scored={scored} setScored={setScored} player="one"/>
 
-              <div
-                className={theWinnerIs ? 'player-icons' : 'player-icons first'}
-              >
+              <div className={theWinnerIs ? 'player-icons' : 'player-icons first'} >
                 <div>
 
                   <FirstElemetA
