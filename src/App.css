@@ -217,3 +217,25 @@ font-size: 15px;
   margin: 5px;
   padding: 5px;
  }
+ .title-icon-rotation{
+  animation:rotation 4s infinite linear;
+ }
+
+
+ .title-icon{
+  animation: heartbeat 2s infinite
+ }
+
+ @keyframes rotation {to{transform: rotate(1turn)}}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,4 +1,3 @@
-import Confetti from 'react-confetti'
 
 /* eslint-disable react/react-in-jsx-scope */
 export const IcontQuestionMark = () => {

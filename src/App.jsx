@@ -216,7 +216,7 @@ function App () {
     <>
     <div className='title'>
       <h1 >Piedra-papel-tijera</h1>
-      {setting.estiloSheldon && <div><IconAtom/></div> }
+      {setting.estiloSheldon && <div className='title-icon-rotation'> <div className='title-icon'><IconAtom/></div></div> }
     </div>
 
       <div className="container">

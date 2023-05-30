@@ -1,3 +1,30 @@
+@font-face {
+    font-family: 'SFCollegiate';
+    src: url('../fonts/SFCollegiate.ttf') format('truetype');
+  }
+  
+.match-point{
+    font-family: 'SFCollegiate', Arial, sans-serif;
+    animation: beat 2s infinite ;
+    margin: 0;
+}
+
+@keyframes beat{
+    0% {
+        transform: scale(1);
+      }
+      40% {
+        transform: scale(1.2);
+      }
+      65% {
+        transform: scale(1);
+      }
+      80% {
+        transform: scale(1.3);
+      }100% {
+        transform: scale(1);
+      }
+}
 
 .container-mood
 {
@@ -9,16 +36,13 @@
 
 
 }
-  .mood {
+  .mood {   
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-   width: 100px;
-    /* background-color: red; */
-    /* animation: ascend 2s ease; */
-    animation: slidein 3s linear  alternate ;
-
+    width: 100px;
+    animation: slidein 3s ease-in-out;
   }
 
 /* .player-one-mood{
@@ -26,33 +50,28 @@
     left: 10%;
     border: 1px solid rgb(255, 0, 81);
 } */
-.player-two {
+/* .player-two {
   top: 100%;
     right: 0%;
+} */
+.img-ko{
+    width: 100px;
+    height: 100px;
 }
 
 
 
-  /* @keyframes ascend {
+  @keyframes slidein {
     0% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      50% {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        visibility: visible;
       }
       100% {
         opacity: 0;
-        transform: translateX(-50%) translateY(-50px);
+        visibility: hidden;
       }
-  }
-   */
-
-  @keyframes slidein {
-    from {
-      margin-left: 100%;
-      /* width: 300%; */
-    }
-  
-    to {
-      margin-left: 0%;
-      /* width: 100%; */
-    }
   }

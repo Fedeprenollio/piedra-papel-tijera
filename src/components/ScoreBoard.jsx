@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { MoodsPlayer1 } from './MoodsPlayer1'
 import { MoodPlayers } from './MoodPlayers'
 
 export const ScoreBoard = ({ allLettersPlayers, setting, parcialResult, handleReset, theWinnerIs }) => {
