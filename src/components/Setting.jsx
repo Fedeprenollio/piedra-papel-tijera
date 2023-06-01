@@ -18,8 +18,8 @@ export const Setting = ({ setting, handleSetting, error }) => {
             <input className='input-bo' placeholder='Nombre del player 1' name="namePlayer1" type="text" defaultValue={setting.namePlayer1} />
             <input className='input-bo' placeholder='Nombre del player 2' name="namePlayer2" type="text" defaultValue={setting.namePlayer2} />
           </div>
-          <div className='label-setting'>
-            <label htmlFor="myCheckBox">
+          <div className='label-setting' >
+            <label htmlFor="myCheckBox" className="checkbox-container" >
               Piedra-papel-tijera estilo Sheldon Couper
             </label>
             <input id='myCheckBox' className='input-bo' name="estiloSheldon" type="checkbox" value={true} defaultChecked={setting.estiloSheldon}/>
